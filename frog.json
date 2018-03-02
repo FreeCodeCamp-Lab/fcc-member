@@ -1,6 +1,6 @@
 {
   "type": "node",
-  "name": "fcc_member",
+  "name": "fcc-member",
   "git": {
     "remote": ""
   },

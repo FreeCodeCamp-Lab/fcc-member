@@ -10,6 +10,7 @@ class FccMember {
     this.mobile = (data.mobile||data.mobile)||'';
     this.gender = (data.gender||data.gender)||0;
     this.email = (data.email||data.email)||'';
+    this.github = (data.github||data.github)||'';
     this.status = (data.status||data.status)||1;
     this.createTime = (data.createTime||data.create_time)||0;
     this.updateTime = (data.updateTime||data.update_time)||0;
@@ -255,6 +256,9 @@ class FccMember {
     if(this.email !== null && !(typeof this.email==='string' && this.email.length>=0 && this.email.length<=64)){
       throw new Error('attribute email(email) must be a string length in [0,64]');
     }
+    if(this.github !== null && !(typeof this.github==='string' && this.github.length>=0 && this.github.length<=255)){
+      throw new Error('attribute github(github) must be a string length in [0,255]');
+    }
     if(this.status !== null && !(typeof this.status==='number' && this.status>=0 && this.status<=255)){
       throw new Error('attribute status(status) must be a number in [0,255]');
     }
@@ -342,6 +346,7 @@ const FieldMap = {
   mobile: 'mobile',
   gender: 'gender',
   email: 'email',
+  github: 'github',
   status: 'status',
   create_time: 'createTime',
   update_time: 'updateTime',
@@ -353,6 +358,7 @@ const KeyMap = {
   mobile: 'mobile',
   gender: 'gender',
   email: 'email',
+  github: 'github',
   status: 'status',
   createTime: 'create_time',
   updateTime: 'update_time',

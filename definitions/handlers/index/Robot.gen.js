@@ -37,7 +37,6 @@ class Robot {
     }
     switch (type){
       case 'string':
-      case 'enum':
         if(typeof tmp === 'object'){
           tmp = JSON.stringify(tmp);
         }else{
@@ -45,6 +44,7 @@ class Robot {
         }
         break;
       case 'number':
+      case 'enum':
         tmp = 1*tmp;
         break;
     }
