@@ -23,26 +23,69 @@
     }
   },
   "apis": {
-    "index": {
-      "name": "index",
-      "desc": "index",
+    "post_user": {
+      "name": "post_user",
+      "desc": "post_user",
       "group": "",
       "request": {
-        "method": "get",
-        "path": "",
-        "query": {
+        "method": "post",
+        "path": "/member",
+        "query": {},
+        "params": {},
+        "body": {
           "name": {
             "_type": "string",
-            "_default": "Robot Xiaolan",
+            "_default": "",
             "_desc": "名字 ",
             "_length": [
               0,
-              9007199254740991
+              32
+            ]
+          },
+          "mobile": {
+            "_type": "string",
+            "_default": "",
+            "_desc": "手机 ",
+            "_length": [
+              0,
+              32
+            ]
+          },
+          "email": {
+            "_type": "string",
+            "_default": "",
+            "_desc": "邮箱 ",
+            "_length": [
+              0,
+              64
+            ]
+          },
+          "gender": {
+            "_type": "enum",
+            "_default": 1,
+            "_desc": "性别 "
+          },
+          "github": {
+            "_type": "string",
+            "_default": "",
+            "_desc": "github ",
+            "_length": [
+              0,
+              255
             ]
           }
         },
-        "params": {},
-        "body": {}
+        "headers": {
+          "token": {
+            "_type": "string",
+            "_default": "token",
+            "_desc": "秘钥 ",
+            "_length": [
+              1,
+              32
+            ]
+          }
+        }
       },
       "response": {
         "body": {
@@ -53,8 +96,70 @@
                 "_assert": 200
               },
               "data": {
+                "id": {
+                  "_type": "number"
+                },
                 "name": {
                   "_type": "string"
+                },
+                "mobile": {
+                  "_type": "string"
+                },
+                "gender": {
+                  "_type": "number"
+                },
+                "email": {
+                  "_type": "string"
+                },
+                "github": {
+                  "_type": "string"
+                },
+                "status": {
+                  "_type": "number"
+                },
+                "createTime": {
+                  "_type": "number"
+                },
+                "updateTime": {
+                  "_type": "number"
+                }
+              },
+              "message": {
+                "_type": "string"
+              }
+            },
+            {
+              "code": {
+                "_type": "number",
+                "_assert": 200
+              },
+              "data": {
+                "id": {
+                  "_type": "number"
+                },
+                "name": {
+                  "_type": "string"
+                },
+                "mobile": {
+                  "_type": "string"
+                },
+                "gender": {
+                  "_type": "number"
+                },
+                "email": {
+                  "_type": "string"
+                },
+                "github": {
+                  "_type": "string"
+                },
+                "status": {
+                  "_type": "number"
+                },
+                "createTime": {
+                  "_type": "number"
+                },
+                "updateTime": {
+                  "_type": "number"
                 }
               },
               "message": {
@@ -62,7 +167,28 @@
               }
             }
           ],
-          "failed": []
+          "failed": [
+            {
+              "code": -1,
+              "message": "[INTERNAL_ERROR]Internal Error: not defined: ",
+              "data": null
+            },
+            {
+              "code": -1,
+              "message": "[INTERNAL_ERROR]Internal Error: not defined: ",
+              "data": null
+            },
+            {
+              "code": -1,
+              "message": "[INTERNAL_ERROR]Internal Error: not defined: ",
+              "data": null
+            },
+            {
+              "code": -1,
+              "message": "[INTERNAL_ERROR]Internal Error: not defined: ",
+              "data": null
+            }
+          ]
         }
       }
     }

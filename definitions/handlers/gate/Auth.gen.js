@@ -2,21 +2,24 @@
 
 
 
-class Robot {
+class Auth {
   constructor(options={}){
-    this.name = options.name || 'Robot Xiaolan';
+    this.token = options.token;
     this.validate();
   }
 
   static fromRequest(req){
     let options={};
-    options.name = this.pick(req, 'query.name', 'string', 'Robot Xiaolan');
-    return new Robot(options);
+    if(!this.pick(req, 'headers.token')){
+      throw new Error("Requirement : [token]");
+    }
+    options.token = this.pick(req, 'headers.token', 'string', 'token');
+    return new Auth(options);
   }
 
   validate(){
-    if(!((typeof this.name === 'string') && (this.name.length>=0) && (this.name.length<=9007199254740991))){
-      throw new Error('type validate failed: [name]: String length must between 0 to 9007199254740991');
+    if(!((typeof this.token === 'string') && (this.token.length>=1) && (this.token.length<=32))){
+      throw new Error('type validate failed: [token]: String length must between 1 to 32');
     }
 
   }
@@ -52,4 +55,4 @@ class Robot {
   }
 }
 
-module.exports = Robot;
+module.exports = Auth;

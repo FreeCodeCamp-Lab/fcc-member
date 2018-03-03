@@ -1,23 +1,23 @@
 "use strict";
 const Connection = require('xiaolan-db').Connection('default').conn;
-const TableName = "fcc_member";
+const TableName = "fcc_member_score";
 
-class FccMember {
+class FccMemberScore {
 
   constructor(data={}){
     this.id = (data.id||data.id)||0;
-    this.name = (data.name||data.name)||'小伙伴';
-    this.mobile = (data.mobile||data.mobile)||'';
-    this.gender = (data.gender||data.gender)||0;
-    this.email = (data.email||data.email)||'';
-    this.github = (data.github||data.github)||'';
-    this.status = (data.status||data.status)||1;
+    this.userID = (data.userID||data.user_id)||0;
+    this.info = (data.info||data.info)||0;
+    this.worth = (data.worth||data.worth)||0;
+    this.contribution = (data.contribution||data.contribution)||0;
+    this.active = (data.active||data.active)||0;
+    this.snapshot = (data.snapshot||data.snapshot)||'';
     this.createTime = (data.createTime||data.create_time)||0;
     this.updateTime = (data.updateTime||data.update_time)||0;
   }
 
   static fetchById(v){
-    let sql = 'select * from `fcc_member` where `id`=:v limit 1';
+    let sql = 'select * from `fcc_member_score` where `id`=:v limit 1';
     //@row
     return new Promise((resolved, rejected) => {
       Connection.query({sql:sql, params:{v:v}}, (e ,r)=>{
@@ -25,7 +25,7 @@ class FccMember {
           rejected(e);
         }else{
           if(r[0]){
-            resolved(new FccMember(r[0]));
+            resolved(new FccMemberScore(r[0]));
           }else{
             resolved(null);
           }
@@ -34,17 +34,17 @@ class FccMember {
     });
   }
 
-  static fetchByName(name, page=1, pageSize=10){
-    let sql = 'select * from `fcc_member` where `name`=:name order by `id` desc limit '+((page-1)*pageSize)+','+pageSize+'';
+  static fetchByInfo(info, page=1, pageSize=10){
+    let sql = 'select * from `fcc_member_score` where `info`=:info order by `id` desc limit '+((page-1)*pageSize)+','+pageSize+'';
     //@list
     return new Promise((resolved, rejected) => {
-      Connection.query({sql:sql, params:{name: name}}, (e ,r)=>{
+      Connection.query({sql:sql, params:{info: info}}, (e ,r)=>{
         if(e){
           rejected(e);
         }else{
           let result = [];
           for(let k in r) {
-            result.push(new FccMember(r[k]));
+            result.push(new FccMemberScore(r[k]));
           }
           resolved(result);
         }
@@ -52,17 +52,17 @@ class FccMember {
     });
   }
 
-  static fetchByGender(gender, page=1, pageSize=10){
-    let sql = 'select * from `fcc_member` where `gender`=:gender order by `id` desc limit '+((page-1)*pageSize)+','+pageSize+'';
+  static fetchByWorth(worth, page=1, pageSize=10){
+    let sql = 'select * from `fcc_member_score` where `worth`=:worth order by `id` desc limit '+((page-1)*pageSize)+','+pageSize+'';
     //@list
     return new Promise((resolved, rejected) => {
-      Connection.query({sql:sql, params:{gender: gender}}, (e ,r)=>{
+      Connection.query({sql:sql, params:{worth: worth}}, (e ,r)=>{
         if(e){
           rejected(e);
         }else{
           let result = [];
           for(let k in r) {
-            result.push(new FccMember(r[k]));
+            result.push(new FccMemberScore(r[k]));
           }
           resolved(result);
         }
@@ -70,17 +70,35 @@ class FccMember {
     });
   }
 
-  static fetchByStatus(status, page=1, pageSize=10){
-    let sql = 'select * from `fcc_member` where `status`=:status order by `id` desc limit '+((page-1)*pageSize)+','+pageSize+'';
+  static fetchByContribution(contribution, page=1, pageSize=10){
+    let sql = 'select * from `fcc_member_score` where `contribution`=:contribution order by `id` desc limit '+((page-1)*pageSize)+','+pageSize+'';
     //@list
     return new Promise((resolved, rejected) => {
-      Connection.query({sql:sql, params:{status: status}}, (e ,r)=>{
+      Connection.query({sql:sql, params:{contribution: contribution}}, (e ,r)=>{
         if(e){
           rejected(e);
         }else{
           let result = [];
           for(let k in r) {
-            result.push(new FccMember(r[k]));
+            result.push(new FccMemberScore(r[k]));
+          }
+          resolved(result);
+        }
+      });
+    });
+  }
+
+  static fetchByActive(active, page=1, pageSize=10){
+    let sql = 'select * from `fcc_member_score` where `active`=:active order by `id` desc limit '+((page-1)*pageSize)+','+pageSize+'';
+    //@list
+    return new Promise((resolved, rejected) => {
+      Connection.query({sql:sql, params:{active: active}}, (e ,r)=>{
+        if(e){
+          rejected(e);
+        }else{
+          let result = [];
+          for(let k in r) {
+            result.push(new FccMemberScore(r[k]));
           }
           resolved(result);
         }
@@ -89,7 +107,7 @@ class FccMember {
   }
 
   static fetchByCreateTime(createTime, page=1, pageSize=10){
-    let sql = 'select * from `fcc_member` where `create_time`=:createTime order by `id` desc limit '+((page-1)*pageSize)+','+pageSize+'';
+    let sql = 'select * from `fcc_member_score` where `create_time`=:createTime order by `id` desc limit '+((page-1)*pageSize)+','+pageSize+'';
     //@list
     return new Promise((resolved, rejected) => {
       Connection.query({sql:sql, params:{createTime: createTime}}, (e ,r)=>{
@@ -98,7 +116,7 @@ class FccMember {
         }else{
           let result = [];
           for(let k in r) {
-            result.push(new FccMember(r[k]));
+            result.push(new FccMemberScore(r[k]));
           }
           resolved(result);
         }
@@ -107,7 +125,7 @@ class FccMember {
   }
 
   static fetchByUpdateTime(updateTime, page=1, pageSize=10){
-    let sql = 'select * from `fcc_member` where `update_time`=:updateTime order by `id` desc limit '+((page-1)*pageSize)+','+pageSize+'';
+    let sql = 'select * from `fcc_member_score` where `update_time`=:updateTime order by `id` desc limit '+((page-1)*pageSize)+','+pageSize+'';
     //@list
     return new Promise((resolved, rejected) => {
       Connection.query({sql:sql, params:{updateTime: updateTime}}, (e ,r)=>{
@@ -116,7 +134,7 @@ class FccMember {
         }else{
           let result = [];
           for(let k in r) {
-            result.push(new FccMember(r[k]));
+            result.push(new FccMemberScore(r[k]));
           }
           resolved(result);
         }
@@ -124,16 +142,16 @@ class FccMember {
     });
   }
 
-  static fetchByMobile(mobile, page=1, pageSize=10){
-    let sql = 'select * from `fcc_member` where `mobile`=:mobile order by `id` desc limit '+((page-1)*pageSize)+','+pageSize+'';
+  static fetchByUserID(userID, page=1, pageSize=10){
+    let sql = 'select * from `fcc_member_score` where `user_id`=:userID order by `id` desc limit '+((page-1)*pageSize)+','+pageSize+'';
     //@row
     return new Promise((resolved, rejected) => {
-      Connection.query({sql:sql, params:{mobile: mobile}}, (e ,r)=>{
+      Connection.query({sql:sql, params:{userID: userID}}, (e ,r)=>{
         if(e){
           rejected(e);
         }else{
           if(r[0]){
-            resolved(new FccMember(r[0]));
+            resolved(new FccMemberScore(r[0]));
           }else{
             resolved(null);
           }
@@ -143,8 +161,8 @@ class FccMember {
   }
 
   static fetchByAttr(data={}, page=1, pageSize=10){
-    let allowKey = ['id','name','gender','status','create_time','update_time','mobile'];
-    let sql = 'select * from `fcc_member` where 1 ';
+    let allowKey = ['id','info','worth','contribution','active','create_time','update_time','user_id'];
+    let sql = 'select * from `fcc_member_score` where 1 ';
     if(Object.keys(data).length===0){
       throw new Error('data param required');
     }
@@ -168,7 +186,7 @@ class FccMember {
         }else{
           let result = [];
           for(let k in r) {
-            result.push(new FccMember(r[k]));
+            result.push(new FccMemberScore(r[k]));
           }
           resolved(result);
         }
@@ -188,7 +206,7 @@ class FccMember {
         }else{
           let result = [];
           for(let k in r) {
-            result.push(new FccMember(r[k]));
+            result.push(new FccMemberScore(r[k]));
           }
           resolved(result);
         }
@@ -201,7 +219,7 @@ class FccMember {
   }
   
   static count(expression,where){
-    let sql = 'select count('+expression+') from `fcc_member` ';
+    let sql = 'select count('+expression+') from `fcc_member_score` ';
     let conditions = [];
     let params = {};
     for(let k in where){
@@ -244,23 +262,20 @@ class FccMember {
   }
 
   validate(){
-    if(this.name !== null && !(typeof this.name==='string' && this.name.length>=0 && this.name.length<=64)){
-      throw new Error('attribute name(name) must be a string length in [0,64]');
+    if(this.userID !== null && !(typeof this.userID==='number' && this.userID>=0 && this.userID<=18014398509481982)){
+      throw new Error('attribute userID(user_id) must be a number in [0,18014398509481982]');
     }
-    if(this.mobile !== null && !(typeof this.mobile==='string' && this.mobile.length>=0 && this.mobile.length<=32)){
-      throw new Error('attribute mobile(mobile) must be a string length in [0,32]');
+    if(this.info !== null && !(typeof this.info==='number' && this.info>=0 && this.info<=4294967295)){
+      throw new Error('attribute info(info) must be a number in [0,4294967295]');
     }
-    if(this.gender !== null && !(typeof this.gender==='number' && this.gender>=0 && this.gender<=255)){
-      throw new Error('attribute gender(gender) must be a number in [0,255]');
+    if(this.worth !== null && !(typeof this.worth==='number' && this.worth>=0 && this.worth<=4294967295)){
+      throw new Error('attribute worth(worth) must be a number in [0,4294967295]');
     }
-    if(this.email !== null && !(typeof this.email==='string' && this.email.length>=0 && this.email.length<=64)){
-      throw new Error('attribute email(email) must be a string length in [0,64]');
+    if(this.contribution !== null && !(typeof this.contribution==='number' && this.contribution>=0 && this.contribution<=4294967295)){
+      throw new Error('attribute contribution(contribution) must be a number in [0,4294967295]');
     }
-    if(this.github !== null && !(typeof this.github==='string' && this.github.length>=0 && this.github.length<=255)){
-      throw new Error('attribute github(github) must be a string length in [0,255]');
-    }
-    if(this.status !== null && !(typeof this.status==='number' && this.status>=0 && this.status<=255)){
-      throw new Error('attribute status(status) must be a number in [0,255]');
+    if(this.active !== null && !(typeof this.active==='number' && this.active>=0 && this.active<=4294967295)){
+      throw new Error('attribute active(active) must be a number in [0,4294967295]');
     }
     if(this.createTime !== null && !(typeof this.createTime==='number' && this.createTime>=0 && this.createTime<=18014398509481982)){
       throw new Error('attribute createTime(create_time) must be a number in [0,18014398509481982]');
@@ -335,34 +350,34 @@ class FccMember {
 
   static create(data){
     //@this
-    return new FccMember(data);
+    return new FccMemberScore(data);
   }
 
 }
 
 const FieldMap = {
   id: 'id',
-  name: 'name',
-  mobile: 'mobile',
-  gender: 'gender',
-  email: 'email',
-  github: 'github',
-  status: 'status',
+  user_id: 'userID',
+  info: 'info',
+  worth: 'worth',
+  contribution: 'contribution',
+  active: 'active',
+  snapshot: 'snapshot',
   create_time: 'createTime',
   update_time: 'updateTime',
 };
 
 const KeyMap = {
   id: 'id',
-  name: 'name',
-  mobile: 'mobile',
-  gender: 'gender',
-  email: 'email',
-  github: 'github',
-  status: 'status',
+  userID: 'user_id',
+  info: 'info',
+  worth: 'worth',
+  contribution: 'contribution',
+  active: 'active',
+  snapshot: 'snapshot',
   createTime: 'create_time',
   updateTime: 'update_time',
 };
 
 
-module.exports = FccMember;
+module.exports = FccMemberScore;

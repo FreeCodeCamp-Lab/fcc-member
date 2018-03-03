@@ -4,6 +4,6 @@ const Router = require('xiaolan-router');
 
 let router = new Router();
 
-router.get('', 'index');
+router.group('member').use('gate').post('','post_user');
 
 module.exports = router;
