@@ -175,7 +175,12 @@ class FccMemberScore {
       }else{
         throw new Error('Not Allow Fetching By [ "'+k+'" ]');
       }
-      sql += ' and `'+field+'`=:'+k+'';
+      if (Array.isArray(data[k]) && data[k].length) {
+        sql += ' and `'+field+'` in ("'+data[k].join('","')+'")';
+      } else {
+        sql += ' and `'+field+'`=:'+k+'';
+      }
+      
     }
     sql += ' order by `id` desc limit '+((page-1)*pageSize)+','+pageSize;
     //@list

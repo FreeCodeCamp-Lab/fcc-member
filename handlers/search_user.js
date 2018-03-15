@@ -14,11 +14,12 @@ const Query = {
 module.exports = async (Query) => {
   let filter = {};
   for(let k in Query){
-    if(!Query[k]){
+    if(!Query[k] || Query[k].length===0){
       continue;
     }
     filter[k] = Query[k];
   }
+  
   let rows = await MemberModel.fetchByAttr(filter);
   
   return rows;

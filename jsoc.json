@@ -6,6 +6,16 @@
       "message": "[COMMON_ERROR]通用错误: ",
       "data": null
     },
+    "error.UNAUTHORIZED": {
+      "code": 1001401001,
+      "message": "[UNAUTHORIZED]未授权: ",
+      "data": null
+    },
+    "error.AUTHORIZED_INVALID": {
+      "code": 1001401002,
+      "message": "[AUTHORIZED_INVALID]授权错误: ",
+      "data": null
+    },
     "error.INTERNAL_ERROR": {
       "code": -1,
       "message": "[INTERNAL_ERROR]Internal Error: ",
@@ -169,13 +179,13 @@
           ],
           "failed": [
             {
-              "code": -1,
-              "message": "[INTERNAL_ERROR]Internal Error: not defined: ",
+              "code": 1001401001,
+              "message": "[UNAUTHORIZED]未授权: ",
               "data": null
             },
             {
-              "code": -1,
-              "message": "[INTERNAL_ERROR]Internal Error: not defined: ",
+              "code": 1001401002,
+              "message": "[AUTHORIZED_INVALID]授权错误: ",
               "data": null
             },
             {
@@ -284,23 +294,13 @@
           ],
           "failed": [
             {
-              "code": -1,
-              "message": "[INTERNAL_ERROR]Internal Error: not defined: ",
+              "code": 1001401001,
+              "message": "[UNAUTHORIZED]未授权: ",
               "data": null
             },
             {
-              "code": -1,
-              "message": "[INTERNAL_ERROR]Internal Error: not defined: ",
-              "data": null
-            },
-            {
-              "code": -1,
-              "message": "[INTERNAL_ERROR]Internal Error: not defined: ",
-              "data": null
-            },
-            {
-              "code": -1,
-              "message": "[INTERNAL_ERROR]Internal Error: not defined: ",
+              "code": 1001401002,
+              "message": "[AUTHORIZED_INVALID]授权错误: ",
               "data": null
             }
           ]
