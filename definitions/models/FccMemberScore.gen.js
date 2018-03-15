@@ -328,7 +328,7 @@ class FccMemberScore {
     return new Promise((resolved, rejected) => {
       let sql = `update \`${TableName}\` set `;
       let data = this.data();
-      data.updateTime = Number.parseInt(Date.now()/1000);
+      data.updateTime = data.updateTime||Number.parseInt(Date.now()/1000);
       let fields = [];
       for(let k in data){
         if(k==='id' || data[k]===null){

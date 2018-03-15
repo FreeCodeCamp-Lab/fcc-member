@@ -12,7 +12,7 @@ module.exports = new Table('fcc_member', {
   gender: Field.name('gender').tinyint(true).default(0).comment('性别:0不知道,1男,2女').index(),
   email: Field.name('email').varchar(64).allowNull().comment('邮箱地址'),
   github: Field.name('github').varchar(255).allowNull().comment('github 地址'),
-  status: Field.name('status').tinyint(true).default(1).index().comment('0.禁用 1.正常 '),
+  status: Field.name('status').tinyint(true).default(1).index().comment('0.未定义 1.正常 2.拉黑'),
   createTime: Field.name('create_time').bigint(true).index(),
   updateTime: Field.name('update_time').bigint(true).index()
 });

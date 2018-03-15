@@ -191,6 +191,121 @@
           ]
         }
       }
+    },
+    "search_user": {
+      "name": "search_user",
+      "desc": "search_user",
+      "group": "",
+      "request": {
+        "method": "get",
+        "path": "/member",
+        "query": {
+          "id": {
+            "_type": "array",
+            "_default": [],
+            "_desc": "IDs "
+          },
+          "mobile": {
+            "_type": "string",
+            "_default": "",
+            "_desc": "手机号 ",
+            "_length": [
+              0,
+              11
+            ]
+          },
+          "status": {
+            "_type": "number",
+            "_default": 1,
+            "_desc": "状态 ",
+            "_range": [
+              0,
+              1
+            ]
+          }
+        },
+        "params": {},
+        "body": {},
+        "headers": {
+          "token": {
+            "_type": "string",
+            "_default": "token",
+            "_desc": "秘钥 ",
+            "_length": [
+              1,
+              32
+            ]
+          }
+        }
+      },
+      "response": {
+        "body": {
+          "success": [
+            {
+              "code": {
+                "_type": "number",
+                "_assert": 200
+              },
+              "data": [
+                {
+                  "id": {
+                    "_type": "number"
+                  },
+                  "name": {
+                    "_type": "string"
+                  },
+                  "mobile": {
+                    "_type": "string"
+                  },
+                  "gender": {
+                    "_type": "number"
+                  },
+                  "email": {
+                    "_type": "string"
+                  },
+                  "github": {
+                    "_type": "string"
+                  },
+                  "status": {
+                    "_type": "number"
+                  },
+                  "createTime": {
+                    "_type": "number"
+                  },
+                  "updateTime": {
+                    "_type": "number"
+                  }
+                }
+              ],
+              "message": {
+                "_type": "string"
+              }
+            }
+          ],
+          "failed": [
+            {
+              "code": -1,
+              "message": "[INTERNAL_ERROR]Internal Error: not defined: ",
+              "data": null
+            },
+            {
+              "code": -1,
+              "message": "[INTERNAL_ERROR]Internal Error: not defined: ",
+              "data": null
+            },
+            {
+              "code": -1,
+              "message": "[INTERNAL_ERROR]Internal Error: not defined: ",
+              "data": null
+            },
+            {
+              "code": -1,
+              "message": "[INTERNAL_ERROR]Internal Error: not defined: ",
+              "data": null
+            }
+          ]
+        }
+      }
     }
   }
 }

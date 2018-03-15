@@ -13,9 +13,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "xiaolan": "^1.6.18"
+    "xiaolan": "1.6.22"
   },
   "devDependencies": {
     "request-agent": "^1.0.3"
+  },
+  "fcc": {
+    "name": "fcc-member",
+    "type": "node",
+    "root": "",
+    "publicUrl": ""
   }
 }

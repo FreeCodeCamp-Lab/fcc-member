@@ -2,24 +2,33 @@
 
 
 
-class Auth {
+class Query {
   constructor(options={}){
-    this.token = options.token;
+    this.id = options.id || [];
+    this.mobile = options.mobile || '';
+    this.status = options.status || 1;
     this.validate();
   }
 
   static fromRequest(req){
     let options={};
-    if(!this.pick(req, 'headers.token')){
-      throw new Error("Requirement : [token]");
-    }
-    options.token = this.pick(req, 'headers.token', 'string', 'token');
-    return new Auth(options);
+    options.id = this.pick(req, 'query.id', 'array', [], 'number');
+    options.mobile = this.pick(req, 'query.mobile', 'string', '');
+    options.status = this.pick(req, 'query.status', 'number', 1);
+    return new Query(options);
   }
 
   validate(){
-    if(!((typeof this.token === 'string') && (this.token.length>=1) && (this.token.length<=32))){
-      throw new Error('type validate failed: [token]: String length must between 1 to 32');
+    if(!(Array.isArray(this.id) && (this.id.length===0 || typeof this.id[0] === 'number'))){
+      throw new Error('type validate failed: [id]: must be array of [number]');
+    }
+
+    if(!((typeof this.mobile === 'string') && (this.mobile.length>=0) && (this.mobile.length<=11))){
+      throw new Error('type validate failed: [mobile]: String length must between 0 to 11');
+    }
+
+    if(!(!Number.isNaN(this.status) && (this.status>=0) && (this.status<=1))){
+      throw new Error('type validate failed: [status]: Number must in range 0 to 1');
     }
 
   }
@@ -66,4 +75,4 @@ class Auth {
   }
 }
 
-module.exports = Auth;
+module.exports = Query;
