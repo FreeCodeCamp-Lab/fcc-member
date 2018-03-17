@@ -83,6 +83,15 @@
               0,
               255
             ]
+          },
+          "firstEvent": {
+            "_type": "number",
+            "_default": 0,
+            "_desc": "活动ID ",
+            "_range": [
+              0,
+              9007199254740991
+            ]
           }
         },
         "headers": {
@@ -127,6 +136,9 @@
                 "status": {
                   "_type": "number"
                 },
+                "firstEvent": {
+                  "_type": "number"
+                },
                 "createTime": {
                   "_type": "number"
                 },
@@ -163,6 +175,9 @@
                   "_type": "string"
                 },
                 "status": {
+                  "_type": "number"
+                },
+                "firstEvent": {
                   "_type": "number"
                 },
                 "createTime": {
@@ -232,6 +247,15 @@
               0,
               1
             ]
+          },
+          "firstEvent": {
+            "_type": "number",
+            "_default": 0,
+            "_desc": "首次活动ID ",
+            "_range": [
+              0,
+              9007199254740991
+            ]
           }
         },
         "params": {},
@@ -277,6 +301,9 @@
                     "_type": "string"
                   },
                   "status": {
+                    "_type": "number"
+                  },
+                  "firstEvent": {
                     "_type": "number"
                   },
                   "createTime": {

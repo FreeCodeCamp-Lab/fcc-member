@@ -12,6 +12,7 @@ class FccMember {
     this.email = (data.email||data.email)||'';
     this.github = (data.github||data.github)||'';
     this.status = (data.status||data.status)||1;
+    this.firstEvent = (data.firstEvent||data.first_event)||0;
     this.createTime = (data.createTime||data.create_time)||0;
     this.updateTime = (data.updateTime||data.update_time)||0;
   }
@@ -88,6 +89,24 @@ class FccMember {
     });
   }
 
+  static fetchByFirstEvent(firstEvent, page=1, pageSize=10){
+    let sql = 'select * from `fcc_member` where `first_event`=:firstEvent order by `id` desc limit '+((page-1)*pageSize)+','+pageSize+'';
+    //@list
+    return new Promise((resolved, rejected) => {
+      Connection.query({sql:sql, params:{firstEvent: firstEvent}}, (e ,r)=>{
+        if(e){
+          rejected(e);
+        }else{
+          let result = [];
+          for(let k in r) {
+            result.push(new FccMember(r[k]));
+          }
+          resolved(result);
+        }
+      });
+    });
+  }
+
   static fetchByCreateTime(createTime, page=1, pageSize=10){
     let sql = 'select * from `fcc_member` where `create_time`=:createTime order by `id` desc limit '+((page-1)*pageSize)+','+pageSize+'';
     //@list
@@ -143,7 +162,7 @@ class FccMember {
   }
 
   static fetchByAttr(data={}, page=1, pageSize=10){
-    let allowKey = ['id','name','gender','status','create_time','update_time','mobile'];
+    let allowKey = ['id','name','gender','status','first_event','create_time','update_time','mobile'];
     let sql = 'select * from `fcc_member` where 1 ';
     if(Object.keys(data).length===0){
       throw new Error('data param required');
@@ -267,6 +286,9 @@ class FccMember {
     if(this.status !== null && !(typeof this.status==='number' && this.status>=0 && this.status<=255)){
       throw new Error('attribute status(status) must be a number in [0,255]');
     }
+    if(this.firstEvent !== null && !(typeof this.firstEvent==='number' && this.firstEvent>=0 && this.firstEvent<=18014398509481982)){
+      throw new Error('attribute firstEvent(first_event) must be a number in [0,18014398509481982]');
+    }
     if(this.createTime !== null && !(typeof this.createTime==='number' && this.createTime>=0 && this.createTime<=18014398509481982)){
       throw new Error('attribute createTime(create_time) must be a number in [0,18014398509481982]');
     }
@@ -353,6 +375,7 @@ const FieldMap = {
   email: 'email',
   github: 'github',
   status: 'status',
+  first_event: 'firstEvent',
   create_time: 'createTime',
   update_time: 'updateTime',
 };
@@ -365,6 +388,7 @@ const KeyMap = {
   email: 'email',
   github: 'github',
   status: 'status',
+  firstEvent: 'first_event',
   createTime: 'create_time',
   updateTime: 'update_time',
 };

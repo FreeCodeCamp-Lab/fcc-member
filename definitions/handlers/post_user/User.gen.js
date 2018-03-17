@@ -9,6 +9,7 @@ class User {
     this.email = options.email || '';
     this.gender = options.gender || 1;
     this.github = options.github || '';
+    this.firstEvent = options.firstEvent || 0;
     this.validate();
   }
 
@@ -22,6 +23,7 @@ class User {
     options.email = this.pick(req, 'body.email', 'string', '');
     options.gender = this.pick(req, 'body.gender', 'enum', 1);
     options.github = this.pick(req, 'body.github', 'string', '');
+    options.firstEvent = this.pick(req, 'body.firstEvent', 'number', 0);
     return new User(options);
   }
 
@@ -48,6 +50,10 @@ class User {
 
     if(!((typeof this.github === 'string') && (this.github.length>=0) && (this.github.length<=255))){
       throw new Error('type validate failed: [github]: String length must between 0 to 255');
+    }
+
+    if(!(!Number.isNaN(this.firstEvent) && (this.firstEvent>=0) && (this.firstEvent<=9007199254740991))){
+      throw new Error('type validate failed: [firstEvent]: Number must in range 0 to 9007199254740991');
     }
 
   }

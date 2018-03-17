@@ -9,9 +9,7 @@ module.exports = async (Auth)=>{
   if(Auth.token === ''){
     return error.UNAUTHORIZED;
   }
-  console.log(Auth);
   if(Auth.token !== process.env['APP_KEY']){
-    console.log(error);
     return error.AUTHORIZED_INVALID;
   }
   return true;

@@ -7,6 +7,7 @@ class Query {
     this.id = options.id || [];
     this.mobile = options.mobile || '';
     this.status = options.status || 1;
+    this.firstEvent = options.firstEvent || 0;
     this.validate();
   }
 
@@ -15,6 +16,7 @@ class Query {
     options.id = this.pick(req, 'query.id', 'array', [], 'number');
     options.mobile = this.pick(req, 'query.mobile', 'string', '');
     options.status = this.pick(req, 'query.status', 'number', 1);
+    options.firstEvent = this.pick(req, 'query.firstEvent', 'number', 0);
     return new Query(options);
   }
 
@@ -29,6 +31,10 @@ class Query {
 
     if(!(!Number.isNaN(this.status) && (this.status>=0) && (this.status<=1))){
       throw new Error('type validate failed: [status]: Number must in range 0 to 1');
+    }
+
+    if(!(!Number.isNaN(this.firstEvent) && (this.firstEvent>=0) && (this.firstEvent<=9007199254740991))){
+      throw new Error('type validate failed: [firstEvent]: Number must in range 0 to 9007199254740991');
     }
 
   }

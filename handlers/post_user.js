@@ -13,6 +13,8 @@ const User = {
   gender: 1,
   //github string:0,255 in:body
   github: '',
+  //活动ID number:1 in:body
+  firstEvent: 0,
 };
 
 module.exports = async (User) => {
@@ -21,22 +23,23 @@ module.exports = async (User) => {
     // new user
     let newUser = memberModel.create(User);
     let saved = await newUser.save(true);
-    if(saved === true){
+    if (saved === true) {
       return newUser;
-    }else{
+    } else {
       return saved;
     }
   } else {
     // update
-    for(let k in User){
-      if(!!User[k]){
-        model[k] = User[k]; 
+    User.firstEvent = 0;
+    for (let k in User) {
+      if (!!User[k]) {
+        model[k] = User[k];
       }
     }
     let saved = await model.update(true);
-    if(saved === true){
+    if (saved === true) {
       return model;
-    }else{
+    } else {
       return saved;
     }
   }

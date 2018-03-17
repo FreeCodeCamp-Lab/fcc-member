@@ -1,5 +1,7 @@
 "use strict";
 
+
+
 class Auth {
   constructor(options={}){
     this.token = options.token;
