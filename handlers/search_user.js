@@ -3,7 +3,7 @@
 const MemberModel = require('../definitions/models/FccMember.gen');
 
 const Query = {
-  //IDs []number:0,100 in:query
+  //IDs []number:0,100:1,999999 in:query
   id: [],
   //手机号 string:0,11 in:query
   mobile: '',

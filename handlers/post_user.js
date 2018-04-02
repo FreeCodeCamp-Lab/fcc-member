@@ -10,7 +10,7 @@ const User = {
   //邮箱 string:0,64 in:body
   email: '',
   //性别 enum:帅哥,美女 in:body
-  gender: 1,
+  gender: '1',
   //github string:0,255 in:body
   github: '',
   //活动ID number:1 in:body
@@ -36,6 +36,7 @@ module.exports = async (User) => {
         model[k] = User[k];
       }
     }
+    model.updateTime = Number.parseInt(Date.now()/1000);
     let saved = await model.update(true);
     if (saved === true) {
       return model;

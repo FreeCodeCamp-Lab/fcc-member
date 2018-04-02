@@ -72,8 +72,13 @@
           },
           "gender": {
             "_type": "enum",
-            "_default": 1,
-            "_desc": "性别 "
+            "_default": "1",
+            "_desc": "性别 ",
+            "_options": {
+              "0": "unknown",
+              "1": "帅哥",
+              "2": "美女"
+            }
           },
           "github": {
             "_type": "string",
@@ -228,7 +233,16 @@
           "id": {
             "_type": "array",
             "_default": [],
-            "_desc": "IDs "
+            "_desc": "IDs ",
+            "_array_length": [
+              0,
+              100
+            ],
+            "_member_range": [
+              1,
+              999999
+            ],
+            "_member_type": "number"
           },
           "mobile": {
             "_type": "string",

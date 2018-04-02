@@ -21,8 +21,13 @@ class Query {
   }
 
   validate(){
-    if(!(Array.isArray(this.id) && (this.id.length===0 || typeof this.id[0] === 'number'))){
+    if(!(Array.isArray(this.id) && (this.id.length >= 0 && this.id.length <= 100))){
       throw new Error('type validate failed: [id]: must be array of [number]');
+    }
+    for (let k in this.id) {
+      if (!((typeof this.id[k] === 'number') && (this.id[k] >= 1) && (this.id[k] <= 999999))){
+        throw new Error('type validate failed: [id]: must be array of [number] in [1,999999]');
+      }
     }
 
     if(!((typeof this.mobile === 'string') && (this.mobile.length>=0) && (this.mobile.length<=11))){
@@ -58,7 +63,7 @@ class Query {
         if(typeof tmp === 'object'){
           tmp = JSON.stringify(tmp);
         }else{
-          tmp = tmp.toString();
+          tmp = decodeURIComponent(tmp.toString());
         }
         break;
       case 'number':

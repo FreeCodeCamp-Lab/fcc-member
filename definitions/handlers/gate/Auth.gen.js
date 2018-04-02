@@ -43,7 +43,7 @@ class Auth {
         if(typeof tmp === 'object'){
           tmp = JSON.stringify(tmp);
         }else{
-          tmp = tmp.toString();
+          tmp = decodeURIComponent(tmp.toString());
         }
         break;
       case 'number':
